@@ -13,15 +13,15 @@ class mensagemTableSeeder extends Seeder
     public function run()
     {
         Mensagem::create([
-            'titulo' => 'Olá inicial',
-            'texto' => 'Olá mundo...',
-            'autor' => 'Tiago'
+            'titulo' => 'Olá mundo',
+            'texto' => 'Olá mundo... Acho que vamos ser amigos :)',
+            'autor' => 'Rafael Lauxen'
         ]);
 
         Mensagem::create([
-            'titulo' => 'Olá final',
-            'texto' => 'Olá mundo...final..',
-            'autor' => 'Maria'
+            'titulo' => 'Olá mundo cruel',
+            'texto' => 'Tudo tem um fim e nem tudo são verdades...',
+            'autor' => 'Rafael Lauxen'
         ]);
     }
 }

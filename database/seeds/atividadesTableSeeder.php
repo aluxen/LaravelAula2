@@ -13,8 +13,8 @@ class atividadesTableSeeder extends Seeder
     public function run()
     {
         Atividade::create([
-            'title' => 'Prova de Matemática',
-            'description' => 'Prova sobre números imaginários',
+            'title' => 'Prova dsaaaaaaaaaaaaaaaaaaaaaaatemática',
+            'description' => 'Prova sossssssssssssssssbre números imaginários',
             'scheduledto' => '2018-09-01 13:15:00'
         ]);
 

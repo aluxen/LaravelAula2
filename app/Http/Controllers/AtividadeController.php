@@ -1,12 +1,9 @@
 <?php
-
 namespace App\Http\Controllers;
-
-use App\Atividade;
+use App\Mensagem;
 use Illuminate\Http\Request;
 use \Illuminate\Support\Facades\Validator;
-
-class AtividadeController extends Controller
+class MensagemController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,10 +12,9 @@ class AtividadeController extends Controller
      */
     public function index()
     {
-        $listaAtividades = Atividade::all();
-        return view('atividade.list',['atividades' => $listaAtividades]);
+        $listaMensagens = Mensagem::all();
+        return view('mensagem.list',['mensagens' => $listaMensagens]);
     }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -26,9 +22,8 @@ class AtividadeController extends Controller
      */
     public function create()
     {
-        return view('atividade.create');
+        return view('mensagem.create');
     }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -38,133 +33,115 @@ class AtividadeController extends Controller
     public function store(Request $request)
     {
         //faço as validações dos campos
-
         //vetor com as mensagens de erro
         $messages = array(
-            'title.required' => 'É obrigatório um título para a atividade',
-            'description.required' => 'É obrigatória uma descrição para a atividade',
-            'scheduledto.required' => 'É obrigatório o cadastro da data/hora da atividade',
+            'titulo.required' => 'É obrigatório um título para a mensagem',
+            'texto.required' => 'É obrigatória um texto',
+            'autor.required' => 'É obrigatório o cadastro do autor da mensagem',
         );
-
         //vetor com as especificações de validações
         $regras = array(
-            'title' => 'required|string|max:255',
-            'description' => 'required',
-            'scheduledto' => 'required|string',
+            'titulo' => 'required|string|max:255',
+            'texto' => 'required',
+            'autor' => 'required|string',
         );
-
         //cria o objeto com as regras de validação
         $validador = Validator::make($request->all(), $regras, $messages);
-
         //executa as validações
         if ($validador->fails()) {
-            return redirect('atividades/create')
+            return redirect('mensagens/create')
             ->withErrors($validador)
             ->withInput($request->all);
         }
-
         //se passou pelas validações, processa e salva no banco...
-        $obj_Atividade = new Atividade();
-        $obj_Atividade->title =       $request['title'];
-        $obj_Atividade->description = $request['description'];
-        $obj_Atividade->scheduledto = $request['scheduledto'];
-        $obj_Atividade->save();
-
-        return redirect('/atividades')->with('success', 'Atividade criada com sucesso!!');
+        $obj_Mensagem = new Mensagem();
+        $obj_Mensagem->titulo =       $request['titulo'];
+        $obj_Mensagem->texto = $request['texto'];
+        $obj_Mensagem->autor = $request['autor'];
+        $obj_Mensagem->save();
+        return redirect('/mensagens')->with('success', 'Mensagem criada com sucesso!!');
     }
-
     /**
      * Display the specified resource.
      *
-     * @param  \App\Atividade  $atividade
+     * @param  \App\Mensagem  $mensagem
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        $atividade = Atividade::find($id);
-        return view('atividade.show',['atividade' => $atividade]);
+        $mensagem = Mensagem::find($id);
+        return view('mensagem.show',['mensagem'=>$mensagem]);
     }
-
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Atividade  $atividade
+     * @param  \App\Mensagem  $mensagem
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        $obj_Atividade = Atividade::find($id);
-        return view('atividade.edit',['atividade' => $obj_Atividade]);   
+        $obj_mensagem = Mensagem::find($id);
+        return view('mensagem.edit',['mensagem' => $obj_mensagem]);
     }
-
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Atividade  $atividade
+     * @param  \App\Mensagem  $mensagem
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
         //faço as validações dos campos
-
         //vetor com as mensagens de erro
         $messages = array(
-            'title.required' => 'É obrigatório um título para a atividade',
-            'description.required' => 'É obrigatória uma descrição para a atividade',
-            'scheduledto.required' => 'É obrigatório o cadastro da data/hora da atividade',
+            'titulo.required' => 'É obrigatório um título para a mensagem',
+            'texto.required' => 'É obrigatória um texto para a mensagem',
+            'autor.required' => 'É obrigatório o cadastro do autor da mensagem',
         );
-
         //vetor com as especificações de validações
         $regras = array(
-            'title' => 'required|string|max:255',
-            'description' => 'required',
-            'scheduledto' => 'required|string',
+            'titulo' => 'required|string|max:255',
+            'texto' => 'required',
+            'autor' => 'required|string',
         );
-
         //cria o objeto com as regras de validação
         $validador = Validator::make($request->all(), $regras, $messages);
-
         //executa as validações
         if ($validador->fails()) {
-            return redirect('atividades/$id/edit')
+            return redirect('mensagens/$id/edit')
             ->withErrors($validador)
             ->withInput($request->all);
         }
-
         //se passou pelas validações, processa e salva no banco...
-        $obj_atividade = Atividade::findOrFail($id);
-        $obj_atividade->title =       $request['title'];
-        $obj_atividade->description = $request['description'];
-        $obj_atividade->scheduledto = $request['scheduledto'];
-        $obj_atividade->save();
-
-        return redirect('/atividades')->with('success', 'Atividade alterada com sucesso!!');
+        $obj_mensagem = Mensagem::findOrFail($id);
+        $obj_mensagem->titulo = $request['titulo'];
+        $obj_mensagem->texto = $request['texto'];
+        $obj_mensagem->autor = $request['autor'];
+        $obj_mensagem->save();
+        return redirect('/mensagens')->with('success', 'Mensagem alterada com sucesso!!');
     }
-
     /**
      * Show the form for deleting the specified resource.
      *
-     * @param  \App\Atividade  $atividade
+     * @param  \App\Mensagem  $mensagem
      * @return \Illuminate\Http\Response
      */
     public function delete($id)
     {
-        $obj_Atividade = Atividade::find($id);
-        return view('atividade.delete',['atividade' => $obj_Atividade]);
+        $obj_mensagem = Mensagem::find($id);
+        return view('mensagem.delete',['mensagem' => $obj_mensagem]);
     }
-
-
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Atividade  $atividade
+     * @param  \App\Mensagem  $mensagem
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $obj_atividade = Atividade::findOrFail($id);
-        $obj_atividade->delete($id);
-        return redirect('/atividades')->with('sucess','Atividade excluída com Sucesso!!');
+        $obj_mensagem = Mensagem::findOrFail($id);
+        $obj_mensagem->delete($id);
+        return redirect('/mensagens')->with('sucess','Mensagem excluída com Sucesso!!');
     }
 }

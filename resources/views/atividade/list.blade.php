@@ -23,5 +23,6 @@
 @endforeach
 
 <br>
+@auth
 <p><a href="/atividades/create">Criar novo registro</a></p>
-
+@endauth

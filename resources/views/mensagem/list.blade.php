@@ -23,4 +23,16 @@
 @endforeach
 
 <br>
+@auth
 <p><a href="/mensagens/create">Criar novo registro</a></p>
+@endauth
+
+
+
+
+
+
+
+
+
+

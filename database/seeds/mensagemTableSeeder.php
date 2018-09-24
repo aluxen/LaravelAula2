@@ -1,8 +1,6 @@
 <?php
-
 use Illuminate\Database\Seeder;
 use App\Mensagem;
-
 class mensagemTableSeeder extends Seeder
 {
     /**
@@ -13,17 +11,18 @@ class mensagemTableSeeder extends Seeder
     public function run()
     {
         Mensagem::create([
-            'titulo' => 'Olá mundo',
-            'texto' => 'Olá mundo... Acho que vamos ser amigos :)',
-            'autor' => 'Rafael Lauxen',
-            'user_id'=> 1
+            'titulo' => 'Olá inicial',
+            'texto' => 'Olá mundo...',
+            'autor' => 'Rafa',
+            'user_id' => 1,
+            'atividade_id' => 1
         ]);
-
         Mensagem::create([
-            'titulo' => 'Olá mundo cruel',
-            'texto' => 'Tudo tem um fim e nem tudo são verdades...',
-            'autor' => 'Rafael Lauxen',
-            'user_id'=> 1
+            'titulo' => 'Olá final',
+            'texto' => 'Olá mundo...final..',
+            'autor' => 'Maria José de Almeida',
+            'user_id' => 1,
+            'atividade_id' => 1
         ]);
     }
 }

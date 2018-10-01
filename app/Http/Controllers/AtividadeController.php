@@ -19,7 +19,7 @@ class AtividadeController extends Controller
             $listaAtividades = Atividade::where('user_id', Auth::id() )->get();     
         }else{
             //retorna todas as atividades
-            $listaAtividades = Atividade::all();
+            $listaAtividades = Atividade::paginate(2);
         }
         
         return view('atividade.list',['atividades' => $listaAtividades]);

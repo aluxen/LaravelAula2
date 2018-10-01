@@ -27,7 +27,7 @@
 <p><a href="/mensagens/create">Criar novo registro</a></p>
 @endauth
 
-
+{{ $mensagens->links() }}
 
 
 

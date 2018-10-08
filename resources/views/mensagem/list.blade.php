@@ -1,3 +1,6 @@
+@extends('layouts.app')
+
+@section('content')
 <h1>Lista de Mensagem</h1>
 <hr>
 
@@ -30,7 +33,7 @@
 {{ $mensagens->links() }}
 
 
-
+@endsection
 
 
 
